@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* Fuerza tema claro */
+html {
+  color-scheme: light;            /* evita que el SO cambie a dark */
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --font-sans: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
+  --font-mono: var(--font-geist-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+}
+
+body {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  font-family: var(--font-sans);
+}
