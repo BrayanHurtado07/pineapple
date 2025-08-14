@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Minus, Plus, Trash2, X, MessageCircle } from 'lucide-react';
 import { useCartStore } from '@/store/useCartStore';
 import { useCartUI } from '@/store/useCartUI';
-import { buildWhatsAppLink, buildWhatsAppMessage } from '@/lib/whatsapp';
+import { buildWhatsAppLink, buildWhatsAppText } from '@/lib/whatsapp';
 
 const PHONE = '51973181599';
 
@@ -31,7 +31,7 @@ export default function CartDrawer() {
   );
 
   const checkoutWhatsApp = () => {
-    const text = buildWhatsAppMessage(
+    const text = buildWhatsAppText(
       items.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
       subtotal,
       'PEN'

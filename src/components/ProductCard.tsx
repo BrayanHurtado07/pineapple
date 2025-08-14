@@ -17,10 +17,11 @@ type Props = {
   badge?: Badge;
   redirectToCart?: boolean; // si true, abre el drawer
   desc?: string;
+  features?: string[];
 };
 
 export default function ProductCard({
-  id, name, price, regularPrice, image, badge = null, redirectToCart = false, desc,
+  id, name, price, regularPrice, image, badge = null, redirectToCart = false, desc, features,
 }: Props) {
   const [qty, setQty] = useState(1);
   const addItem = useCartStore((s) => s.addItem);
@@ -150,7 +151,7 @@ export default function ProductCard({
       <ImageModal
         open={zoom}
         onClose={() => setZoom(false)}
-        product={{ id, name, image, price, regularPrice, badge, desc }}
+        product={{ id, name, image, price, regularPrice, badge, desc, features }}
       />
     </>
   );

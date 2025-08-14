@@ -1,133 +1,142 @@
-/* Overlay centrado (déjalo como lo tienes) */
+/* Overlay centrado */
 .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.7);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    box-sizing: border-box;
-  }
-  
-  /* MODAL
-     - Mobile: flex columna + scroll en el modal
-     - md+: grid 2 columnas
-  */
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* MODAL */
+.modal {
+  position: relative;
+  width: min(1300px, 99vw);
+  max-height: 99vh;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.18);
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
   .modal {
-    position: relative;
-    width: min(1300px, 99vw);  /* Más ancho */
-    max-height: 99vh;          /* Más alto */
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.18);
-  
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr; /* Imagen un poco más ancha */
+    overflow-y: hidden;
   }
-  
-  @media (min-width: 768px) {
-    .modal {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      overflow-y: hidden;
-    }
-  }
-  
-  
-  /* Botón cerrar dentro del modal (sin cambios) */
-  .closeBtn {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    z-index: 5;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-    width: 36px;
-    border-radius: 9999px;
-    background: rgba(255,255,255,.92);
-    backdrop-filter: saturate(180%) blur(6px);
-    box-shadow: 0 1px 4px rgba(0,0,0,.12);
-    cursor: pointer;
-    transition: transform .12s ease, background .12s ease;
-  }
-  .closeBtn:hover { background: #fff; transform: scale(1.03); }
-  
-  /* Col imagen */
+}
+
+/* Botón cerrar */
+.closeBtn {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 36px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: saturate(180%) blur(6px);
+  box-shadow: 0 1px 4px rgba(0,0,0,.12);
+  cursor: pointer;
+  transition: transform .12s ease, background .12s ease;
+}
+.closeBtn:hover {
+  background: #fff;
+  transform: scale(1.03);
+}
+
+/* Columna imagen - SIN gris ni padding excesivo */
+.imgCol {
+  position: relative;
+  background: transparent; /* Quitar gris */
+  padding: 0;               /* Quitar padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
   .imgCol {
-    position: relative;
-    background: #f6f7f9;
-    padding: 20px;
-    padding-top: 56px;
-    flex: 0 0 auto;                     /* en móvil, que no crezca */
+    padding: 8px; /* Pequeño padding solo en móvil */
   }
-  @media (min-width: 768px) { .imgCol { padding-top: 20px; } }
-  
-  .img {
-    display: block;
-    margin: 0 auto;
-    height: 40vh;
-    width: auto;
-    object-fit: contain;
-  }
-  @media (min-width: 768px) { .img { height: 52vh; } }
-  
-  /* Badge */
-  .badge {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    border-radius: 9999px;
-    padding: 2px 8px;
-    font-size: 12px;
-    color: #fff;
-  }
-  
-  /* Columna de info
-     - Mobile: ocupa el resto del alto y permite que su hijo scrollee
-     - md+: limitamos a la altura del modal
-  */
+}
+
+/* Imagen más grande */
+.img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  max-height: 85vh;   /* Usar casi toda la altura disponible */
+  object-fit: contain;
+}
+
+/* Badge */
+.badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #fff;
+}
+
+/* Columna de info */
+.infoCol {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+@media (min-width: 768px) {
   .infoCol {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;      /* en móvil: ocupa el alto restante del modal */
-    min-height: 0;       /* clave para que .contentScroll pueda hacer overflow */
+    max-height: 96vh;
   }
-  @media (min-width: 768px) {
-    .infoCol {
-      max-height: 96vh;
-    }
-  }
-  
-  /* Área scrolleable del contenido */
+}
+
+/* Área scrolleable del contenido */
+.contentScroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: auto;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
   .contentScroll {
-    flex: 1 1 auto;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain; /* evita rebotes que cierran el modal */
-    touch-action: auto;
-    padding: 20px 20px 20px;
+    padding: 20px 24px;
   }
-  @media (min-width: 768px) {
-    .contentScroll { padding: 20px 24px; }
-  }
-  
-  /* Footer dentro del flujo (no sticky) */
+}
+
+/* Footer dentro del flujo */
+.footer {
+  position: static;
+  border-top: 1px solid rgba(0,0,0,.08);
+  background: #fff;
+  padding: 15px;
+}
+
+@media (min-width: 768px) {
   .footer {
-    position: static;
-    border-top: 1px solid rgba(0,0,0,.08);
-    background: #fff;
-    padding: 15px 15px 15px;
+    padding: 16px 24px 24px;
   }
-  @media (min-width: 768px) {
-    .footer { padding: 16px 24px 24px; }
-  }
-  
-  .list { margin-left: 18px; }
-  .list li { margin: 4px 0; }
-  
+}
+
+.list { margin-left: 18px; }
+.list li { margin: 4px 0; }

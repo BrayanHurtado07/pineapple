@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, ShoppingCart, X, MessageCircle, ChevronDown } from 'lucide-react';
 import { useCartStore } from '@/store/useCartStore';
 import { cx } from '@/lib/cx';
-import { buildWhatsAppLink, buildWhatsAppMessage } from '@/lib/whatsapp';
+import { buildWhatsAppLink, buildWhatsAppText } from '@/lib/whatsapp';
 import s from './ImageModal.module.css';
 
 type Price = { price: number; regularPrice?: number };
@@ -77,7 +77,7 @@ export default function ImageModal({ open, onClose, product }: Props) {
   };
 
   const handleBuyWhatsApp = () => {
-    const text = buildWhatsAppMessage(
+    const text = buildWhatsAppText(
       [{ id: product.id, name: product.name, price: product.price, qty }],
       product.price * qty,
       'PEN'
@@ -117,6 +117,7 @@ export default function ImageModal({ open, onClose, product }: Props) {
                 src={product.image || '/placeholder.png'}
                 alt={product.name}
                 className={s.img}
+                loading='lazy'
               />
               {product.badge && (
                 <span

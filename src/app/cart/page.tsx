@@ -3,7 +3,7 @@
 
 import Navbar from '@/components/Navbar';
 import { useCartStore } from '@/store/useCartStore';
-import { buildWhatsAppLink, buildWhatsAppMessage } from '@/lib/whatsapp';
+import { buildWhatsAppLink, buildWhatsAppText } from '@/lib/whatsapp';
 
 export default function CartPage() {
   const { items, updateQty, removeItem, subtotal, clear } = useCartStore();
@@ -13,7 +13,7 @@ export default function CartPage() {
 
   const handleCheckout = () => {
     if (items.length === 0) return;
-    const text = buildWhatsAppMessage(items, total, 'PEN');
+    const text = buildWhatsAppText(items, total, 'PEN');
     const url = buildWhatsAppLink({ phone, text });
     window.open(url, '_blank');
   };
