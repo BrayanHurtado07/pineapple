@@ -74,7 +74,7 @@ export default function CartDrawer() {
                 <ul className="space-y-3">
                   {items.map((i) => (
                     <li key={i.id} className="flex gap-3 rounded-xl border p-3">
-                      <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-gray-50">
+                      <div className="h-25 w-25 flex-shrink-0 overflow-hidden rounded-lg bg-gray-50 align-middle">
                         <img src={i.image || '/placeholder.png'} alt={i.name} className="h-full w-full object-contain" />
                       </div>
 
@@ -136,10 +136,27 @@ export default function CartDrawer() {
                   onChange={(e) => setAccepted(e.target.checked)}
                 />
                 <span>
-                  Acepto los <a href="/terminos" className="underline">Términos y Condiciones</a> y la{' '}
-                  <a href="/privacidad" className="underline">Política de Privacidad</a>.
+                  Acepto los{" "}
+                  <a
+                    href="/terminos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                  >
+                    Términos y Condiciones
+                  </a>{" "}
+                  y la{" "}
+                  <a
+                    href="/privacidad"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
+                  >
+                    Política de Privacidad
+                  </a>.
                 </span>
               </label>
+
 
               {/* acciones */}
               <div className="mt-4 grid gap-2">

@@ -19,7 +19,7 @@ const products: Product[] = [
     price: 99,
     regularPrice: 129,
     image: "/airpods_pro_2da_generacion.png",
-    badge: "bestseller",
+    badge: "popular",
     desc: "Cancelación de ruido. Estuche MagSafe.",
     features: [
       "Cancelación activa de ruido",
@@ -52,6 +52,7 @@ const products: Product[] = [
     price: 49,
     regularPrice: 59,
     image: "/pack_charger.png",
+    badge: "new",
     desc: "Cubo 20W + Cable 1m USB-C.",
     features: [
       "Cubo cargador 20W tipo C",
@@ -65,6 +66,7 @@ const products: Product[] = [
     name: "Cubo Cargador 20W Tipo C",
     price: 35,
     image: "/cargador_cubo_20w.png",
+    badge: "new",
     desc: "Carga rápida y segura.",
     features: [
       "Potencia de salida: 20 W",
@@ -78,6 +80,7 @@ const products: Product[] = [
     name: "Cable Tipo C a Lightning",
     price: 29,
     image: "/cable_c_a_lightning.png",
+    badge: "new",
     desc: "1 metro. Alta durabilidad.",
     features: [
       "USB-C a Lightning",
@@ -92,6 +95,7 @@ const products: Product[] = [
     price: 19,
     regularPrice: 25,
     image: "/case_silicona.png",
+    badge: "new",
     desc: "Ajuste perfecto y suave al tacto.",
     features: [
       "Silicona suave premium",

@@ -5,6 +5,7 @@ import { ShoppingCart, Plus, Minus, Check } from 'lucide-react';
 import { useCartStore } from '@/store/useCartStore';
 import { useCartUI } from '@/store/useCartUI'; // <-- para abrir el drawer
 import ImageModal from './ImageModal';
+import { BadgePill } from './BadgePill';
 
 type Badge = 'bestseller' | 'popular' | 'new' | 'sale' | null;
 
@@ -55,22 +56,26 @@ export default function ProductCard({
         whileHover={{ y: -2 }}
       >
         {/* Badge */}
-        {badge && (
-          <span
-            className={[
-              'absolute left-4 top-4 z-10 rounded-full px-2 py-0.5 text-xs text-white',
-              badge === 'bestseller' ? 'bg-emerald-600' :
-              badge === 'popular'   ? 'bg-indigo-600'  :
-              badge === 'new'       ? 'bg-rose-600'    :
-                                      'bg-orange-600',
-            ].join(' ')}
-          >
-            {badge === 'bestseller' ? 'Más vendido' :
-             badge === 'popular'   ? 'Popular' :
-             badge === 'new'       ? 'Nuevo'   : 'Oferta'}
-          </span>
-        )}
 
+        {badge && (
+          <div className="absolute left-4 top-4 z-10">
+            <BadgePill
+              kind={badge}
+              pulse
+              tooltip={
+                badge === 'bestseller' ? 'Producto más vendido'
+                  : badge === 'popular' ? 'Muy solicitado'
+                    : badge === 'new' ? 'Nuevo lanzamiento'
+                      : 'Con descuento'
+              }
+            >
+              {badge === 'bestseller' ? 'Más vendido'
+                : badge === 'popular' ? 'Popular'
+                  : badge === 'new' ? 'Nuevo'
+                    : 'Oferta'}
+            </BadgePill>
+          </div>
+        )}
         {/* Imagen (abre modal) */}
         <button
           className="aspect-square w-full overflow-hidden rounded-xl bg-gray-50"

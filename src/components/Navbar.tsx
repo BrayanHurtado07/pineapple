@@ -59,7 +59,9 @@ export default function Navbar() {
           {/* Centro: Logo */}
           <div className="justify-self-center">
             <Link href="/" className="flex items-center gap-2">
-              <img src="/icon-logo.png" alt="Pineapple" className="h-14 w-auto" />
+              <img src="/icon-logo.png" alt="Pineapple" className="h-32 w-auto" />
+              {/* <span className="text-xl font-bold tracking-widest uppercase">Pineapple</span> */}
+
             </Link>
           </div>
 

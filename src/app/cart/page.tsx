@@ -30,7 +30,7 @@ export default function CartPage() {
           <>
             <ul className="divide-y rounded-2xl border">
               {items.map((it) => (
-                <li key={it.id} className="flex flex-wrap items-center justify-between gap-4 p-4">
+                <li key={it.id} className="flex flex-wrap items-center justify-center gap-4 p-4">
                   <div>
                     <p className="text-sm text-gray-800">{it.name}</p>
                     <p className="text-xs text-gray-500">S/ {it.price.toFixed(2)} c/u</p>
