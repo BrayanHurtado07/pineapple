@@ -22,7 +22,7 @@ export function buildWhatsAppText(
     '',
     `*Subtotal:* S/ ${subtotal.toFixed(2)} ${moneda}`,
     '',
-    'Por favor, indícame el costo total con envío y los pasos para finalizar mi compra. ¡Gracias! 🙌',
+    'Por favor, indícame los pasos para finalizar mi compra. ¡Gracias! 🙌',
   ].join('\n');
 
   // Normaliza a NFC por si copiaste texto desde alguna fuente “rara”

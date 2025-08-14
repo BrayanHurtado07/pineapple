@@ -9,17 +9,17 @@ export default function Footer() {
   return (
     <footer className="mt-16 bg-[#a3cace] text-white">
       {/* Contenido principal */}
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6 px-4 py-10 text-center">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6 px-4 py-3 text-center">
 
         {/* Col 1: Logo y marca */}
-        <div className="md:col-span-3">
-          <div className="flex items-center gap-3">
-            <img src="/icon-logo.png" alt="Pineapple" className="h-14 w-auto" />
+        <div className="md:col-span-1">
+          <div className="flex items-center gap-1">
+            <img src="/icon-logo1.png" alt="Pineapple" className="h-20 w-auto" />
             <span className="text-xl font-extrabold tracking-widest">PINEAPPLE</span>
           </div>
 
           {/* redes sociales */}
-          <div className="mt-4 flex items-center gap-4 text-2xl justify-center">
+          <div className="mt-4 flex items-center gap-4 text-3xl justify-center">
             <Link
               href="https://instagram.com/pineapple.go"
               aria-label="Instagram"

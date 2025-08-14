@@ -12,7 +12,7 @@ export const metadata = {
             Términos y Condiciones
           </h1>
           <p className="mt-2 text-sm text-gray-500">
-            Última actualización: 13/08/2025
+            Última actualización: 05/07/2025
           </p>
         </header>
   

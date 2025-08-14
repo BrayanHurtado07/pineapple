@@ -37,7 +37,7 @@ const products: Product[] = [
     regularPrice: 169,
     image: "/pack_pineapple.png",
     badge: "bestseller",
-    desc: "Combo lanzamiento: cable + cubo + case.",
+    desc: "Combo lanzamiento: airpods + cable + cubo + case.",
     features: [
       "AirPods Pro 2da Gen",
       "Cable USB-C a Lightning",
