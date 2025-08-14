@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Minus, Plus, Trash2, X, MessageCircle } from 'lucide-react';
 import { useCartStore } from '@/store/useCartStore';
@@ -11,7 +11,10 @@ const PHONE = '51973181599';
 export default function CartDrawer() {
   const { cartOpen, closeCart } = useCartUI();
   const { items, updateQty, removeItem, clear } = useCartStore();
+
   const [accepted, setAccepted] = useState(false);
+  const [shake, setShake] = useState(false);
+  const termsRef = useRef<HTMLLabelElement>(null);
 
   useEffect(() => {
     if (!cartOpen) return;
@@ -38,6 +41,20 @@ export default function CartDrawer() {
     );
     const url = buildWhatsAppLink({ phone: PHONE, text });
     window.open(url, '_blank');
+  };
+
+  const canCheckout = accepted && items.length > 0;
+
+  const handleCheckoutClick = () => {
+    if (!canCheckout) {
+      // UX: vibrar, resaltar y hacer scroll al bloque de términos
+      setShake(true);
+      termsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // quitar shake al terminar la animación (fallback por si no llega el callback)
+      setTimeout(() => setShake(false), 600);
+      return;
+    }
+    checkoutWhatsApp();
   };
 
   return (
@@ -74,7 +91,7 @@ export default function CartDrawer() {
                 <ul className="space-y-3">
                   {items.map((i) => (
                     <li key={i.id} className="flex gap-3 rounded-xl border p-3">
-                      <div className="h-25 w-25 flex-shrink-0 overflow-hidden rounded-lg bg-gray-50 align-middle">
+                      <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-gray-50">
                         <img src={i.image || '/placeholder.png'} alt={i.name} className="h-full w-full object-contain" />
                       </div>
 
@@ -127,8 +144,18 @@ export default function CartDrawer() {
                 * Envíos: Lima 2–5 días hábiles, Callao 2–5, Provincias 2–7.
               </p>
 
-              {/* términos */}
-              <label className="mt-3 flex cursor-pointer items-start gap-2 text-xs text-gray-600">
+              {/* términos (shake + highlight) */}
+              <motion.label
+                ref={termsRef}
+                tabIndex={-1}
+                className={`mt-3 flex cursor-pointer items-start gap-2 rounded-md p-2 text-xs text-gray-600 transition
+    ${!accepted && shake ? 'ring-2 ring-primary/50 bg-primary/10' : ''}
+  `}
+                animate={shake ? { x: [0, -8, 8, -6, 6, -3, 3, 0] } : { x: 0 }}
+                transition={{ duration: 0.48 }}
+                onAnimationComplete={() => setShake(false)}
+              >
+
                 <input
                   type="checkbox"
                   className="mt-0.5 h-4 w-4 rounded border-gray-300"
@@ -136,36 +163,33 @@ export default function CartDrawer() {
                   onChange={(e) => setAccepted(e.target.checked)}
                 />
                 <span>
-                  Acepto los{" "}
-                  <a
-                    href="/terminos"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline"
-                  >
+                  Acepto los{' '}
+                  <a href="/terminos" target="_blank" rel="noopener noreferrer" className="underline">
                     Términos y Condiciones
-                  </a>{" "}
-                  y la{" "}
-                  <a
-                    href="/privacidad"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline"
-                  >
+                  </a>{' '}
+                  y la{' '}
+                  <a href="/privacidad" target="_blank" rel="noopener noreferrer" className="underline">
                     Política de Privacidad
                   </a>.
                 </span>
-              </label>
+              </motion.label>
 
+              {/* <div className="mt-1 min-h-[18px]" aria-live="polite">
+                {!accepted && shake && (
+                  <span className="text-xs text-black">Para continuar, acepta los términos y condiciones.</span>
+                )}
+              </div> */}
 
               {/* acciones */}
-              <div className="mt-4 grid gap-2">
+              <div className="mt-3 grid gap-2">
                 <button
-                  onClick={checkoutWhatsApp}
-                  disabled={!accepted || items.length === 0}
-                  className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm text-white disabled:opacity-50"
+                  onClick={handleCheckoutClick}
+                  aria-disabled={!canCheckout}
+                  className={`inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm text-white transition
+                    ${canCheckout ? '' : 'opacity-50 cursor-not-allowed'}
+                  `}
                   style={{ backgroundColor: '#558992' }}
-                  title={!accepted ? 'Acepta los términos para continuar' : 'Continuar por WhatsApp'}
+                  title={!canCheckout ? 'Acepta los términos para continuar' : 'Continuar por WhatsApp'}
                 >
                   <MessageCircle className="h-4 w-4" />
                   Finalizar por WhatsApp
