@@ -1,8 +1,7 @@
-// src/app/layout.tsx
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer"; // 👈 importación
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,33 +12,25 @@ export const metadata: Metadata = {
   title: "Pineapple",
   description: "Accesorios Apple minimalistas",
   icons: {
-    icon: "/icon-logo.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
-  openGraph: {
-    title: "Pineapple",
-    description: "Accesorios Apple minimalistas",
-    url: "https://tu-dominio.com",
-    siteName: "Pineapple",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Pineapple" }],
-    type: "website",
-  },
-  manifest: "/site.webmanifest",        // opcional, si lo tienes
-  themeColor: "#558992",
-};
-
-export const viewport: Viewport = {
-  themeColor: "#558992",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className="bg-background" suppressHydrationWarning>
-      <body className={`${poppins.className} bg-background text-foreground antialiased`} suppressHydrationWarning>
-        <div className="flex min-h-screen flex-col">
+      <body
+        className={`${poppins.className} bg-background text-foreground antialiased`}
+        suppressHydrationWarning
+      >
+        <div className="flex flex-col min-h-screen">
           <main className="flex-grow">{children}</main>
-          <Footer />
+          <Footer /> {/* <- aquí lo reactivas */}
         </div>
       </body>
     </html>
   );
 }
+
