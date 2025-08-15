@@ -15,7 +15,7 @@
 .modal {
   position: relative;
   width: min(1300px, 99vw);
-  max-height: 99vh;
+  max-height: 90vh;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 20px 40px rgba(0,0,0,.18);
